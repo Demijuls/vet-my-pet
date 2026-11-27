@@ -1,8 +1,28 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<VetMyPet.Models.Pet>;
+
+@{
+    ViewData["VetMyPet"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Here's the list of all our patients</h1>
+    <p>How many we care for now:@Model.Count</p>
 </div>
+
+
+<ul class="list-unstyled pet-grid">
+    @foreach (var pet in Model)
+    {
+        <li class="pet-card">
+            <img src="@pet.ImageUrl" alt="@pet.Name" width="400" />
+            <h4>
+                <a asp-action="PetDetails" asp-route-petId="@pet.PetId">@pet.Name</a>
+            </h4>
+            <p>Owner: @pet.Owner?.Name</p>
+            <p>Medical Records: @pet.MedicalRecords.Count</p>
+        </li>
+    }
+    
+</ul>
+
+<a asp-action="AddPet" class="btn">Add pet</a>
