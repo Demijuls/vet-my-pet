@@ -1,0 +1,35 @@
+@model VetMyPet.Models.Pet;
+
+@{
+  ViewData["VetMyPet"] = "Pet Details";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Who do we meet today?</h1>
+</div>
+
+
+<img src="@Model.ImageUrl" alt="@Model.Name" width="400" />
+<h4>@Model.Name</h4>
+<ul>
+  <h3>Owner:</h3>
+  <li>@Model.Owner?.Name</li>
+  <li>@Model.Owner?.Phone</li>
+  <li>Weight: @Model.Weight kg</li>
+</ul>
+
+<h4>Medical records:</h4>
+@if (Model.MedicalRecords.Count == 0)
+{
+  <p>All healthy, wow</p>
+}
+else
+{
+
+  <ul>
+    @foreach (var record in Model.MedicalRecords)
+    {
+      <li>@record.Illness</li>
+    }
+  </ul>
+}
