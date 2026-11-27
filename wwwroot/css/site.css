@@ -8,8 +8,36 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+h1,
+h2 {
+  color: #5c0101;
+}
+
+h3,
+h4,
+h5 {
+  color: #540e02;
+}
+
+a {
+  text-decoration: none;
+  color: #540e02;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #c60000;
+}
+
+.btn,
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  background-color: #8e20d2;
+  color: #fff;
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #8e20d2;
 }
 
 html {
@@ -21,11 +49,53 @@ body {
   margin-bottom: 60px;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+.form-floating>.form-control-plaintext::placeholder,
+.form-floating>.form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+.form-floating>.form-control-plaintext:focus::placeholder,
+.form-floating>.form-control:focus::placeholder {
   text-align: start;
+}
+
+/* Two-column pet grid */
+.pet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  padding: 0;
+  margin-top: 30px;
+}
+
+/* Individual pet card */
+.pet-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Pet images */
+.pet-card img {
+  width: 100%;
+  max-width: 400px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Pet names */
+.pet-card h4 {
+  margin-top: 15px;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .pet-grid {
+    grid-template-columns: 1fr;
+  }
 }
