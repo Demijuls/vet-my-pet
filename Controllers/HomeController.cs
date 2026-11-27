@@ -31,6 +31,38 @@ public class HomeController : Controller
         return View(petDetails);
     }
 
+    [HttpGet]
+    public IActionResult AddPet()
+    {
+        ViewBag.Owners = _context.Owners.ToList();
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult AddPet(CreatePetRequest request)
+    {
+        if (!_context.Owners.Any(o => o.OwnerId == request.OwnerId))
+        {
+            ModelState.AddModelError("", "Please choose an existing owner.");
+            ViewBag.Owners = _context.Owners.ToList();
+            return View();
+        }
+
+        var pet = new Pet
+        {
+            PetId = $"pet_{Guid.NewGuid().ToString("N")[..8]}",
+            Name = request.Name,
+            OwnerId = request.OwnerId,
+            Weight = request.Weight,
+            ImageUrl = request.ImageUrl,
+        };
+
+        _context.Pets.Add(pet);
+        _context.SaveChanges();
+
+        return RedirectToAction(nameof(Index));
+    }
 
     public IActionResult Privacy()
     {
@@ -43,4 +75,5 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    public record CreatePetRequest(string Name, string OwnerId, double Weight, string? ImageUrl);
 }
